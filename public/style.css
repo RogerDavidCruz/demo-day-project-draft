@@ -1,0 +1,27 @@
+body{
+  padding-top:80px;
+  word-wrap:break-word;
+  height: 100%;
+  width: 100%;
+  background-image: url(img/loginTest4.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+section{
+  height: 100%;
+  width: 100%;
+  background-image: url(img/loginTest4.jpg);
+  background-size: cover;
+}
+
+.container {
+  color:lightgreen;
+}
+
+@media (min-width: 768px) {
+  .col-sm-6 {
+    width: 33%;
+  }
+
+}
