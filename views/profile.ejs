@@ -5,9 +5,10 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="profilePage">
   <div class="container">
 
     <div class="page-header text-center">
@@ -40,10 +41,10 @@
 
         <div class="col-sm-6">
           <h3>User Profile Allergens</h3>
-          <ul class="foods">
-          <% for(var i=0; i<foods.length; i++) {%>
-            <li class="food">
-              <span><%= foods[i] %></span> |
+          <ul class="allergies">
+          <% for(var i=0; i<allergies.length; i++) {%>
+            <li class="allergies">
+              <span><%= allergies[i] %></span> |
               <span><i class="fa fa-trash" aria-hidden="true"></i></span>
             </li>
           <% } %>
@@ -51,18 +52,12 @@
 
           <h2>Add a Food</h2>
           <% if (user.local.email) { %>
-          <form action="/foods" method="POST">
-            <input type="text" placeholder="foods" name="foods">
+          <form action="/allergies" method="POST">
+            <input type="text" placeholder="allergies" name="allergies">
             <button type="submit">Submit</button>
           </form>
         </div>
         <% } %>
-
-        <h3>What is the name of the restaurant?</h3>
-        <form class="" action="index.html" method="post">
-          <label for="restaurant">Location:</label>
-          <input type="text" name="" placeholder="restaurant name" value="">
-        </form>
 
         <h3>What is the cuisine you enjoy most eating?</h3>
         <section>

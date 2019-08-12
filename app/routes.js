@@ -4,16 +4,35 @@ module.exports = function(app, passport, db) {
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
+      console.log("poop");
         res.render('index.ejs');
     });
 
+//Make a route to specifically get the Allergies and Cuisines they enjoy eating
+    //query parameter could be used to direct to cuisine
+    // Looking for you to add one new route that contains a query parameter.
+    //That query parameter should be used to retrieve something specific from your MongoDB
+
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('foods').findOne({user: req.user.local.email}, (err, result) => {
+        db.collection('allergies').findOne({userId: req.session.passport.user}, (err, result) => {
+          console.log(result);
           if (err ) return console.log(err)
           res.render('profile.ejs', {
             user : req.user,
-            foods: result == undefined ? [] : result.ingredients
+            allergies: result == undefined ? [] : result.allergies
+          })
+        })
+    });
+
+    //Allergy SECTION =======================
+    app.get('/allergies', isLoggedIn, function(req, res) {
+        db.collection('allergies').findOne({userId: req.session.passport.user}, (err, result) => {
+          console.log(result);
+          if (err ) return console.log(err)
+          res.render('allergies.ejs', {
+            user : req.user,
+            allergies: result == undefined ? [] : result.allergies
           })
         })
     });
@@ -28,19 +47,31 @@ module.exports = function(app, passport, db) {
 
 
   //Creating the allergens list per user
-    app.post('/foods', isLoggedIn, (req, res) => {
-      console.log(req.body.foods)
-      db.collection('foods').findOneAndUpdate({user: req.user.local.email}, {$push: { ingredients: req.body.foods }}, {upsert: true}, (err, result) => {
+    app.post('/allergies', isLoggedIn, (req, res) => {
+      console.log(req.body.allergies)
+      console.log(req.session.passport.user)
+      let userId = req.session.passport.user
+      // db.collection('allergies').findOneAndUpdate({user: req.user.local.email}, {$push: { ingredients: req.body.allergies }}, {upsert: true}, (err, result) => {
+      db.collection('allergies').findOneAndUpdate({userId: userId}, {$push: { allergies: req.body.allergies }}, {upsert: true}, (err, result) => {
         if (err) return console.log(err)
+        //note: check to put back to the response (John)
         console.log('saved to database')
         res.redirect('/profile')
       })
     })
 
-    app.put('/foods', (req, res) => {
-      db.collection('foods').findOneAndUpdate({foods: req.body.foods, like: req.body.like, unlike: req.body.unlike}, {
+  //POST - to save the recipes onto profile page
+
+
+
+
+
+
+  //PUT - allows the user to update their allergies
+    app.put('/allergies', (req, res) => {
+      db.collection('allergies').findOneAndUpdate({allergies: req.body.allergies, like: req.body.like, unlike: req.body.unlike}, {
         $set: {
-          foods: req.body.foods,
+          allergies: req.body.allergies,
           like: req.body.like,
           unlike: req.body.unlike
         }
@@ -55,8 +86,10 @@ module.exports = function(app, passport, db) {
 
 //make a document for each food**** instead.
 
-    app.delete('/foods', (req, res) => {
-      db.collection('foods').findOneAndUpdate({user: req.user.local.email}, {$pull: { ingredients: req.body.foods }}, (err, result) => {
+    //Question: the allergen is being deleted from the db but not on the front end...?
+
+    app.delete('/allergies', (req, res) => {
+      db.collection('allergies').findOneAndUpdate({user: req.user.local.email}, {$pull: {allergies: req.body.allergies }}, (err, result) => {
         if (err) return res.send(500, err)
         res.send(200, 'OK')
       })
@@ -88,7 +121,7 @@ module.exports = function(app, passport, db) {
 
         // process the signup form
         app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/profile', // redirect to the secure profile section
+            successRedirect : '/allergies', // redirect to the secure profile section  //successRedirect : '/profile',
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));

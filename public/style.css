@@ -1,4 +1,72 @@
-body{
+/* how do you target specific pages of ejs?
+should I use IDs on the tags? */
+
+html{
+  font-size: 10px;
+}
+
+#indexPage{
+  padding-top:80px;
+  word-wrap:break-word;
+  height: 100%;
+  width: 100%;
+  background-image: url(img/loginTest1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.mainButton {
+    background-color: silver;
+    border: 2px solid black;
+    padding: 8px;
+    border-radius: 20%;
+    text-decoration-line: none;
+    color: black;
+}
+
+.mainBox{
+  background-color: gold;
+  height: 400px;
+  width: 50%;
+  text-align: center;
+  margin-left: 20%;
+  padding: 10%;
+}
+
+iframe{
+  width: 900px;
+  height: 600px;
+}
+
+h1{
+  font-size: 5rem;
+}
+
+h2, h3{
+  font-size: 3rem;
+}
+
+
+#typedSub{
+  min-height: 8rem;
+  margin-top: 0;
+}
+
+a{
+  font-size: 3rem;
+}
+
+#loginPage{
+  padding-top:80px;
+  word-wrap:break-word;
+  height: 100%;
+  width: 100%;
+  background-image: url(img/loginTest6.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#signupPage{
   padding-top:80px;
   word-wrap:break-word;
   height: 100%;
@@ -8,20 +76,83 @@ body{
   background-repeat: no-repeat;
 }
 
-section{
+#ingredientPage{
+  padding-top:80px;
+  word-wrap:break-word;
   height: 100%;
   width: 100%;
   background-image: url(img/loginTest4.jpg);
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.container {
-  color:lightgreen;
+#profilePage{
+  padding-top:80px;
+  word-wrap:break-word;
+  height: 100%;
+  width: 100%;
+  background-image: url(img/loginTest4.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: limegreen;
 }
 
-@media (min-width: 768px) {
-  .col-sm-6 {
-    width: 33%;
+.indexLeft{
+  width: 50%;
+  float: left;
+}
+
+.indexRight{
+  width: 50%;
+  float: left;
+  color: black;
+}
+
+
+
+/* Notes, look over @media syntax for responsiveness */
+/* Projects like levelground and Japanese Women's Society Projects */
+
+@media (min-width:412px) and (max-width: 769px) {
+
+iframe{
+  width: 800px;
+  height: 400px;
+}
+
+  .indexLeft {
+      width: 100%;
+      float: left;
+      display: block;
+    }
+
+  .indexRight {
+      width: 100%;
+      height: 500px;
+      float: left;
+      color: black;
   }
+
+}
+
+@media only screen and (max-width: 411px) {
+
+  iframe{
+    width: 800px;
+    height: 400px;
+  }
+
+    .indexLeft {
+        width: 100%;
+        float: left;
+        display: block;
+      }
+
+    .indexRight {
+        width: 100%;
+        height: 500px;
+        float: left;
+        color: black;
+    }
 
 }
