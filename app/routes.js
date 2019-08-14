@@ -1,40 +1,27 @@
-module.exports = function(app, passport, db) {
+module.exports = function(app, passport, db, ObjectId) {
 
 // normal routes ===============================================================
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
-      console.log("poop");
         res.render('index.ejs');
     });
 
-//Make a route to specifically get the Allergies and Cuisines they enjoy eating
-    //query parameter could be used to direct to cuisine
-    // Looking for you to add one new route that contains a query parameter.
-    //That query parameter should be used to retrieve something specific from your MongoDB
-
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('allergies').findOne({userId: req.session.passport.user}, (err, result) => {
-          console.log(result);
-          if (err ) return console.log(err)
+      var uId = ObjectId(req.session.passport.user)
+      var uName
+      db.collection('users').find({"_id": uId}).toArray((err, result) => {
+        if (err) return console.log(err)
+        uName = result[0].local.username
+        db.collection('foods').find({"username": uName}).toArray((err, result) => {
+          if (err) return console.log(err)
           res.render('profile.ejs', {
-            user : req.user,
-            allergies: result == undefined ? [] : result.allergies
+          user : req.user,
+          foods: result || [] //without || [] the result for foods will always be null // == undefined ? [] : result.allergies
           })
         })
-    });
-
-    //Allergy SECTION =======================
-    app.get('/allergies', isLoggedIn, function(req, res) {
-        db.collection('allergies').findOne({userId: req.session.passport.user}, (err, result) => {
-          console.log(result);
-          if (err ) return console.log(err)
-          res.render('allergies.ejs', {
-            user : req.user,
-            allergies: result == undefined ? [] : result.allergies
-          })
-        })
+      });
     });
 
     // LOGOUT ==============================
@@ -43,53 +30,123 @@ module.exports = function(app, passport, db) {
         res.redirect('/');
     });
 
-// message board routes ===============================================================
+    // POSTS indivdual posts pages == POSTS individual recipes
+
+    app.get('/foods/:post_id', function(req, res) {
+        console.log(req.params.post_id);
+        var uId = ObjectId(req.params.post_id) //look at the URL query params
+        db.collection('foods').find({"_id": uId}).toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('foods.ejs', {
+            foods: result
+          })
+        })
+    });
 
 
-  //Creating the allergens list per user
-    app.post('/allergies', isLoggedIn, (req, res) => {
-      console.log(req.body.allergies)
-      console.log(req.session.passport.user)
-      let userId = req.session.passport.user
-      // db.collection('allergies').findOneAndUpdate({user: req.user.local.email}, {$push: { ingredients: req.body.allergies }}, {upsert: true}, (err, result) => {
-      db.collection('allergies').findOneAndUpdate({userId: userId}, {$push: { allergies: req.body.allergies }}, {upsert: true}, (err, result) => {
-        if (err) return console.log(err)
-        //note: check to put back to the response (John)
-        console.log('saved to database')
-        res.redirect('/profile')
+    //Creating the allergens list per user
+    /************************************************
+      **********************************************/
+    // ESTE ES EL CODIGOOO SALVADO!!!!!
+      app.post('/foods', isLoggedIn, (req, res) => {
+        console.log(req.body.foods)
+        db.collection('foods').findOneAndUpdate({user: req.user.local.email}, {$push: { ingredients: req.body.foods }}, {upsert: true}, (err, result) => {
+          if (err) return console.log(err)
+          console.log('saved to database')
+          res.redirect('/profile')
+        })
       })
-    })
+
+      app.put('/foods', (req, res) => {
+        db.collection('foods').findOneAndUpdate({foods: req.body.foods, like: req.body.like, unlike: req.body.unlike}, {
+          $set: {
+            foods: req.body.foods,
+            like: req.body.like,
+            unlike: req.body.unlike
+          }
+        }, {
+          sort: {_id: -1},
+          upsert: false
+        }, (err, result) => {
+          if (err) return res.send(err)
+          res.send(result)
+        })
+      })
+      /************************************************
+        **********************************************/
+
+    // message board routes ===============================================================
+
+        // app.post('/allergies', (req, res) => {
+        //   console.log(req.body.allergies) //note for allergy to send to db, form data contained in req.body
+        //   var uId = ObjectId(req.session.passport.user)
+        //   var uName
+        //   db.collection('users').find({"_id": uId}).toArray((err, result) => {
+        //     if (err) return console.log(err)
+        //     uName = result[0].local.username
+        //     db.collection('posts').save({username: uName, allergies: req.body.allergies}, (err, result) => {
+        //       if (err) return console.log(err)
+        //       console.log('saved to database')
+        //       res.redirect('/profile')
+        //     })
+        //   })
+        // })
+
+    // Allergies indivdual posts pages
+    // app.get('/posts/:post_id', function(req, res) {
+    //   console.log(req.params.post_id);
+    //   var uId = ObjectId(req.params.post_id) //look at the URL query params
+    //   db.collection('allergies').find({_id: uId}).toArray((err, result) => {
+    //     if (err) return console.log(err)
+    //     res.render('allergies.ejs', {
+    //       posts: result
+    //     })
+    //   })
+    // });
+
+    //Creating the allergens list per user
+
+  //sample try 1
+      // app.post('/profile', (req, res) => {
+      //   var uId = ObjectId(req.session.passport.user)
+      //   var uName
+      //   db.collection('users').find({_id: uId}, (err, result) => {
+      //     if (err) return console.log(err)
+      //     uName = result[0].local.username
+      //     db.collection('allergies').save({username: uName}, {$push: { allergies: req.body.allergies }}, {upsert: true})
+      //     console.log('saved to database')
+      //     res.redirect('/profile')
+      //   })
+      // })
+
+
 
   //POST - to save the recipes onto profile page
 
 
-
-
-
-
   //PUT - allows the user to update their allergies
-    app.put('/allergies', (req, res) => {
-      db.collection('allergies').findOneAndUpdate({allergies: req.body.allergies, like: req.body.like, unlike: req.body.unlike}, {
-        $set: {
-          allergies: req.body.allergies,
-          like: req.body.like,
-          unlike: req.body.unlike
-        }
-      }, {
-        sort: {_id: -1},
-        upsert: false
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
+    // app.put('/allergies', (req, res) => {
+    //   db.collection('allergies').findOneAndUpdate({allergies: req.body.allergies, like: req.body.like, unlike: req.body.unlike}, {
+    //     $set: {
+    //       allergies: req.body.allergies,
+    //       like: req.body.like,
+    //       unlike: req.body.unlike
+    //     }
+    //   }, {
+    //     sort: {_id: -1},
+    //     upsert: false
+    //   }, (err, result) => {
+    //     if (err) return res.send(err)
+    //     res.send(result)
+    //   })
+    // })
 
 //make a document for each food**** instead.
 
     //Question: the allergen is being deleted from the db but not on the front end...?
 
-    app.delete('/allergies', (req, res) => {
-      db.collection('allergies').findOneAndUpdate({user: req.user.local.email}, {$pull: {allergies: req.body.allergies }}, (err, result) => {
+    app.delete('/profile', (req, res) => {
+      db.collection('users').findOneAndUpdate({_id: uId}, {$pull: {allergies: req.body.allergies }}, (err, result) => {
         if (err) return res.send(500, err)
         res.send(200, 'OK')
       })
@@ -121,7 +178,7 @@ module.exports = function(app, passport, db) {
 
         // process the signup form
         app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/allergies', // redirect to the secure profile section  //successRedirect : '/profile',
+            successRedirect : '/profile', // redirect to the secure profile section  //successRedirect : '/profile',
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));

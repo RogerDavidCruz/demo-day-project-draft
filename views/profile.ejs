@@ -1,77 +1,74 @@
 <!doctype html>
 <html>
 <head>
-    <title>FooChoi</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+  <title>FooChoi</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body id="profilePage">
   <div class="container">
 
     <div class="page-header text-center">
-        <h1><span><i class="fas fa-utensils"></i></span> Your Profile</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+      <h1><span><i class="fas fa-utensils"></i></span>Homepage</h1>
+      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
     <div class="row">
 
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Credentials</h3>
 
-                <% if (user.local.email) { %>
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                <% } %>
-
-            </div>
+      <!-- ************Local Information************** -->
+      <div class="col-sm-6">
+        <div class="well">
+          <h3><span class="fa fa-user"></span> <%= user.local.username %></h3>
         </div>
-
-
-        <div class="col-sm-6">
-          <h3>User Profile Allergens</h3>
-          <ul class="allergies">
-          <% for(var i=0; i<allergies.length; i++) {%>
-            <li class="allergies">
-              <span><%= allergies[i] %></span> |
-              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-            </li>
-          <% } %>
-          </ul>
-
-          <h2>Add a Food</h2>
-          <% if (user.local.email) { %>
-          <form action="/allergies" method="POST">
-            <input type="text" placeholder="allergies" name="allergies">
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-        <% } %>
-
-        <h3>What is the cuisine you enjoy most eating?</h3>
-        <section>
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-        </section>
-
-
       </div>
-    </div>
+
+      <div class="col-sm-6">
+          <h2>Add an allergy</h2>
+          <% if (user.local.email) { %>
+            <form action="/foods" method="POST">
+              <input type="text" value="Foods for Allergies" name="postText">
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+          <% } %>
+
+        </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <!-- <h2>User Profile Allergens</h2> -->
+        <ul>
+          <% for(var i=0; i<foods.length; i++) {%>
+            <li class="food">
+              <a href="/foods/<%= foods[i]._id %>">
+                <span><%= foods[i]._id %></span> |
+                <span><%= foods[i].username %></span>
+                <span><%= foods[i].postText %></span>
+                <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+              </a>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+
+          <!-- <div class="col-sm-6">
+            <h3>What type of cuisine do you want to eat today?</h3>
+            <form class="" action="" method="POST">
+              <a href="/recipes/:id"><img src="img/japanese.jpg" alt="">Japanese</a>
+              <a href="#"><img src="img/mexican.jpg" alt="">Mexican</a>
+              <a href="#"><img src="img/thai.jpg" alt="">Thai</a>
+            </form>
+          </div> -->
 
 
-<script src="main.js"></script>
 
-</body>
-</html>
+      <script src="main.js"></script>
+      <!-- <script src="profile.js"></script> -->
+
+    </body>
+    </html>

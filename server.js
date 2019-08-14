@@ -9,6 +9,7 @@ const MongoClient = require('mongodb').MongoClient
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
+var ObjectId = require('mongodb').ObjectID
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -23,19 +24,19 @@ var db
 mongoose.connect(configDB.url,{ useNewUrlParser: true }, (err, database) => {
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, passport, db);
+  require('./app/routes.js')(app, passport, db, ObjectId);
 }); // connect to our database
 
-//app.listen(port, () => {
-    // MongoClient.connect(configDB.url, { useNewUrlParser: true }, (error, client) => {
-    //     if(error) {
-    //         throw error;
-    //     }
-    //     db = client.db(configDB.dbName);
-    //     console.log("Connected to `" + configDB.dbName + "`!");
-    //     require('./app/routes.js')(app, passport, db);
-    // });
-//});
+// app.listen(port, () => {
+//     MongoClient.connect(configDB.url, { useNewUrlParser: true }, (error, client) => {
+//         if(error) {
+//             throw error;
+//         }
+//         db = client.db(configDB.dbName);
+//         console.log("Connected to `" + configDB.dbName + "`!");
+//         require('./app/routes.js')(app, passport, db);
+//     });
+// });
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -50,7 +51,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({
-    secret: 'rcbootcamp2019a', // session secret
+    secret: 'rcbootcamp2019b', // session secret
     resave: true,
     saveUninitialized: true
 }));
@@ -64,4 +65,4 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // launch ======================================================================
 app.listen(port);
-console.log('The Hyperbolic Time Chamber Training Happens In ⏰  ' + port);
+console.log('The Hyperbolic Time Chamber Training Happens In localhost: ⏰  ' + port);

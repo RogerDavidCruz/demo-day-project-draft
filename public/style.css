@@ -46,7 +46,6 @@ h2, h3{
   font-size: 3rem;
 }
 
-
 #typedSub{
   min-height: 8rem;
   margin-top: 0;
@@ -64,6 +63,7 @@ a{
   background-image: url(img/loginTest6.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  color: white; 
 }
 
 #signupPage{
@@ -108,7 +108,16 @@ a{
   color: black;
 }
 
+img {
+    vertical-align: middle;
+    width: 30%;
+    display: block;
+}
 
+a {
+  color: red;
+  background-color: white;
+}
 
 /* Notes, look over @media syntax for responsiveness */
 /* Projects like levelground and Japanese Women's Society Projects */
