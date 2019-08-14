@@ -47,9 +47,18 @@ module.exports = function(app, passport, db, ObjectId) {
     //Creating the allergens list per user
     /************************************************
       **********************************************/
-    // ESTE ES EL CODIGOOO SALVADO!!!!!
+    // THIS PART OF CODE WORKS!!!!!
+      // app.post('/foods', isLoggedIn, (req, res) => {
+      //   console.log(req.body.foods)
+      //   db.collection('foods').findOneAndUpdate({user: req.user.local.email}, {$push: { ingredients: req.body.foods }}, {upsert: true}, (err, result) => {
+      //     if (err) return console.log(err)
+      //     console.log('saved to database')
+      //     res.redirect('/profile')
+      //   })
+      // })
+
       app.post('/foods', isLoggedIn, (req, res) => {
-        console.log(req.body.foods)
+        console.log(parse(req.body.foods))
         db.collection('foods').findOneAndUpdate({user: req.user.local.email}, {$push: { ingredients: req.body.foods }}, {upsert: true}, (err, result) => {
           if (err) return console.log(err)
           console.log('saved to database')

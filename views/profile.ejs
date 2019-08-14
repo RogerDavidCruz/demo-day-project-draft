@@ -30,12 +30,11 @@
           <h2>Add an allergy</h2>
           <% if (user.local.email) { %>
             <form action="/foods" method="POST">
-              <input type="text" value="Foods for Allergies" name="postText">
+              <input type="text" value="Foods for Allergies" name="postText"> <!-- name must be correct to avoid null values into the database -->
               <button type="submit">Submit</button>
             </form>
           </div>
           <% } %>
-
         </div>
 
     <div class="row">
