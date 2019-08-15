@@ -1,6 +1,6 @@
 module.exports = function(app, passport, db, ObjectId) {
 
-// normal routes ===============================================================
+  // normal routes ===============================================================
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
@@ -9,20 +9,19 @@ module.exports = function(app, passport, db, ObjectId) {
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
+      console.log(req);
+      console.log(res);
       var uId = ObjectId(req.session.passport.user)
-      var uName
-      db.collection('users').find({"_id": uId}).toArray((err, result) => {
+      db.collection('foods').findOne({"user": req.user.local.email }, (err, result) => {
+        console.log(result);
         if (err) return console.log(err)
-        uName = result[0].local.username
-        db.collection('foods').find({"username": uName}).toArray((err, result) => {
-          if (err) return console.log(err)
-          res.render('profile.ejs', {
-          user : req.user,
-          foods: result || [] //without || [] the result for foods will always be null // == undefined ? [] : result.allergies
-          })
+        res.render('profile.ejs', {
+        user : req.user,
+        foods: result=== null ? [] : result.ingredients //result.ingredients //without || [] the result for foods will always be null // == undefined ? [] : result.allergies
         })
-      });
+      })
     });
+      // "ternary" regarding line 20, read later.
 
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
@@ -58,8 +57,8 @@ module.exports = function(app, passport, db, ObjectId) {
       // })
 
       app.post('/foods', isLoggedIn, (req, res) => {
-        console.log(parse(req.body.foods))
-        db.collection('foods').findOneAndUpdate({user: req.user.local.email}, {$push: { ingredients: req.body.foods }}, {upsert: true}, (err, result) => {
+        console.log(req.body.foods)
+        db.collection('foods').findOneAndUpdate({user: req.user.local.email}, {$push: { ingredients: req.body.ingredient }}, {upsert: true}, (err, result) => {
           if (err) return console.log(err)
           console.log('saved to database')
           res.redirect('/profile')
@@ -131,7 +130,6 @@ module.exports = function(app, passport, db, ObjectId) {
 
 
   //POST - to save the recipes onto profile page
-
 
   //PUT - allows the user to update their allergies
     // app.put('/allergies', (req, res) => {

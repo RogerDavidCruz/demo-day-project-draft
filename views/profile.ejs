@@ -17,7 +17,7 @@
     </div>
 
     <div class="row">
-
+      ​
 
       <!-- ************Local Information************** -->
       <div class="col-sm-6">
@@ -30,7 +30,7 @@
           <h2>Add an allergy</h2>
           <% if (user.local.email) { %>
             <form action="/foods" method="POST">
-              <input type="text" value="Foods for Allergies" name="postText"> <!-- name must be correct to avoid null values into the database -->
+              <input type="text" placeholder="Foods for Allergies" name="ingredient"> <!-- name must be correct to avoid null values into the database -->
               <button type="submit">Submit</button>
             </form>
           </div>
@@ -41,12 +41,10 @@
       <div class="col-sm-6">
         <!-- <h2>User Profile Allergens</h2> -->
         <ul>
-          <% for(var i=0; i<foods.length; i++) {%>
+          <% for(var i=0; i < foods.length; i++) {%>
             <li class="food">
-              <a href="/foods/<%= foods[i]._id %>">
-                <span><%= foods[i]._id %></span> |
-                <span><%= foods[i].username %></span>
-                <span><%= foods[i].postText %></span>
+              <a href="/foods/<%= foods[i] %>">
+                <span><%= foods[i] %></span>
                 <span><i class="fa fa-trash" aria-hidden="true"></i></span>
               </a>
             </li>
@@ -65,8 +63,7 @@
           </div> -->
 
 
-
-      <script src="main.js"></script>
+  <script src="main.js"></script>
       <!-- <script src="profile.js"></script> -->
 
     </body>
