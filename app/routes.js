@@ -10,11 +10,8 @@ module.exports = function(app, passport, db, ObjectId) {
 
   // PROFILE SECTION =========================
   app.get('/profile', isLoggedIn, function(req, res) {
-    console.log(req);
-    console.log(res);
     var uId = ObjectId(req.session.passport.user)
     db.collection('foods').findOne({"user": req.user.local.email }, (err, result) => {
-      console.log(result);
       if (err) return console.log(err)
       res.render('profile.ejs', {
         user : req.user,
@@ -74,7 +71,6 @@ module.exports = function(app, passport, db, ObjectId) {
       console.log("current user", req.user._id);
       db.collection('foods').findOne({user: req.user.local.email}, (err, foods) => {
         if (err) return console.log(err)
-        console.log("foods", foods);
         res.render('meal.ejs', {meal : meal.meals[0], allergens : foods.ingredients})
       })
 
@@ -84,39 +80,32 @@ module.exports = function(app, passport, db, ObjectId) {
     })
   })
 
-  app.post('/foods', isLoggedIn, (req, res) => {
-    console.log(req.body.foods)
+  //PUT ROUTE - TO UPDATE the Ingredients properties in the document in foods collection
+  app.put('/foods', isLoggedIn, (req, res) => {
     db.collection('foods').findOneAndUpdate({user: req.user.local.email}, {$push: { ingredients: req.body.ingredient }}, {upsert: true}, (err, result) => {
-      if (err) return console.log(err)
-      console.log('saved to database')
-      res.redirect('/profile')
+      if (err) {
+        console.log(err)
+        res.send(500)
+      }
+      res.send(200);
     })
   })
 
-  app.put('/foods', (req, res) => {
-    db.collection('foods').findOneAndUpdate({foods: req.body.foods, like: req.body.like, unlike: req.body.unlike}, {
-      $set: {
-        foods: req.body.foods,
-        like: req.body.like,
-        unlike: req.body.unlike
-      }
-    }, {
-      sort: {_id: -1},
-      upsert: false
-    }, (err, result) => {
-      if (err) return res.send(err)
-      res.send(result)
-    })
+  //POST Route - to post favorites
+  app.post('/favorites', isLoggedIn, (req, res) => {
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${req.params.idMeal}`
+    db.collection('favorites').find({})
   })
 
   // req.body.foodToDelete & req.body.userId
   // db.collection('foods').findOneAndDelete({_id: id, name: foodToDelete})
-  app.delete('/profile', (req, res) => {
-    db.collection('foods').findOneAndUpdate({_id: uId}, {$pull: {allergies: req.body.allergies }}, (err, result) => {
+  app.delete('/profile', isLoggedIn, (req, res) => {
+    db.collection('foods').findOneAndUpdate({_id: uId}, {$pop: {allergies: req.body.allergies }}, (err, result) => {
       if (err) return res.send(500, err)
-      res.send(200, 'OK')
+      res.send(200, 'Deleted Allergen!')
     })
   })
+
 
   // =============================================================================
   // AUTHENTICATE (FIRST LOGIN) ==================================================

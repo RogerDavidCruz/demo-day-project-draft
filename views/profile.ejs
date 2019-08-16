@@ -12,7 +12,7 @@
   <div class="container">
 
     <div class="page-header text-center">
-      <h1><span><i class="fas fa-utensils"></i></span>Homepage</h1>
+      <h1><span><i class="fas fa-utensils"></i></span> Homepage</h1>
       <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
@@ -22,16 +22,16 @@
       <!-- ************Local Information************** -->
       <div class="col-sm-6">
         <div class="well">
-          <h3><span class="fa fa-user"></span> <%= user.local.username %></h3>
+          <h3><span class="fa fa-user"></span> Welcome <%= user.local.username %></h3>
         </div>
       </div>
 
       <div class="col-sm-6">
           <h2>Add an allergy</h2>
           <% if (user.local.email) { %>
-            <form action="/foods" method="POST">
-              <input type="text" placeholder="Foods for Allergies" name="ingredient"> <!-- name must be correct to avoid null values into the database -->
-              <button type="submit">Submit</button>
+            <form>
+              <input type="text" placeholder="Foods for Allergies" id="ingredient"> <!-- name must be correct to avoid null values into the database -->
+              <button class='btn-ingredient' type="submit">Submit</button>
             </form>
           </div>
           <% } %>
@@ -39,32 +39,21 @@
 
     <div class="row">
       <div class="col-sm-6">
-        <!-- <h2>User Profile Allergens</h2> -->
+        <h2>User Profile Allergens</h2>
         <ul>
           <% for(var i=0; i < foods.length; i++) {%>
             <li class="food">
               <a href="/foods/<%= foods[i] %>">
-                <span><%= foods[i] %></span>
+                <span><%= foods[i] %></span></a>
                 <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-              </a>
             </li>
             <% } %>
           </ul>
         </div>
       </div>
 
-          <!-- <div class="col-sm-6">
-            <h3>What type of cuisine do you want to eat today?</h3>
-            <form class="" action="" method="POST">
-              <a href="/recipes/:id"><img src="img/japanese.jpg" alt="">Japanese</a>
-              <a href="#"><img src="img/mexican.jpg" alt="">Mexican</a>
-              <a href="#"><img src="img/thai.jpg" alt="">Thai</a>
-            </form>
-          </div> -->
-
 
   <script src="main.js"></script>
-      <!-- <script src="profile.js"></script> -->
 
     </body>
     </html>

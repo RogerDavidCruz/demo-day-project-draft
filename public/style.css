@@ -5,6 +5,10 @@ html{
   font-size: 10px;
 }
 
+.allergic {
+  color: red;
+}
+
 #indexPage{
   padding-top:80px;
   word-wrap:break-word;
@@ -63,7 +67,7 @@ a{
   background-image: url(img/loginTest6.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  color: white; 
+  color: white;
 }
 
 #signupPage{

@@ -1,23 +1,33 @@
-<h2><%= meal.strMeal %></h2>
-<ul>
-  <% console.log("allergens", allergens)
-   for(var i=1; i < 20; i++) {
-    const propertyName = "strIngredient"+i //creating a string, and find meal object, and
-    if(meal[propertyName]){  //does the ingredient exist in the list of ingredients of the meal
-      let allergic = allergens.find(function(allergen) { //check to see if the ingredient contains an allergen from the list
-        console.log(meal[propertyName], allergen, meal[propertyName].includes(allergen))
-        return meal[propertyName].toLowerCase().includes(allergen.toLowerCase())
-       })
-       console.log("allergic", allergic)
-    let className = ""
-    if(allergic){ //if allergic to this, change the className to allergic
-      className = "allergic"
-    }
-    %>
-    <li class="meal <%= className %>">
-        <span><%= meal[propertyName] %></span>
-        <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-    </li>
-    <% }
-  } %>
-</ul>
+<!doctype html>
+<html>
+<head>
+  <title>FooChoi</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <h2><%= meal.strMeal %></h2>
+  <ul>
+    <% console.log("allergens", allergens)
+    for(var i=1; i < 20; i++) {
+      const propertyName = "strIngredient"+i //creating a string, and find meal object, and
+      if(meal[propertyName]){  //does the ingredient exist in the list of ingredients of the meal
+        let allergic = allergens.find(function(allergen) { //check to see if the ingredient contains an allergen from the list
+          console.log(meal[propertyName], allergen, meal[propertyName].includes(allergen))
+          return meal[propertyName].toLowerCase().includes(allergen.toLowerCase())
+        })
+        console.log("allergic", allergic)
+        let className = ""
+        if(allergic){ //if allergic to this, change the className to allergic
+          className = "allergic"
+        }
+        %>
+        <li class="meal <%= className %>">
+          <span><%= meal[propertyName] %></span>
+        </li>
+        <% }
+      } %>
+    </ul>
+
+    <script src="main.js"></script>
+  </body>
