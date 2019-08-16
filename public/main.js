@@ -38,6 +38,8 @@ Array.from(trash).forEach(function(element) {
           },
           body: JSON.stringify({
             'foods': allergens
+            // foodToDelete: allergens,
+            // user: user id
           })
         }).then(function (response) {
           window.location.reload()

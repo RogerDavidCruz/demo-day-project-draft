@@ -1,0 +1,10 @@
+<ul>
+  <% for(var i=0; i < meals.length; i++) {%>
+    <li class="meals">
+      <a href="/meal/<%= meals[i].idMeal %>">
+        <span><%= meals[i].strMeal %></span>
+        <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+      </a>
+    </li>
+    <% } %>
+</ul>
