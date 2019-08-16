@@ -23,18 +23,15 @@ Array.from(trash).forEach(function(element) {
       element.addEventListener('click', function(e){
         e.preventDefault()
         const allergens = this.parentNode.parentNode.childNodes[1].innerText
-        console.log(allergens)
+        console.log("about to delete", element.id, allergens);
         fetch('foods', {
           method: 'delete',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            'foods' : foods[i],
+            'food' : element.id,
             'ingredient': allergens,
-            //'foodToDelete': allergens,
-            //'foodToDelete': allergens,
-            //'user': user_id
           })
         }).then(function (response) {
           window.location.reload()

@@ -99,8 +99,10 @@ module.exports = function(app, passport, db, ObjectId) {
 
   // req.body.foodToDelete & req.body.userId
   // db.collection('foods').findOneAndDelete({_id: id, name: foodToDelete})
-  app.delete('/profile', isLoggedIn, (req, res) => {
-    db.collection('foods').findOneAndUpdate({_id: uId}, {$pop: {allergies: req.body.allergies }}, (err, result) => {
+  app.delete('/foods', isLoggedIn, (req, res) => {
+    let foodToDelete = req.body.foodToDelete
+    let uId = req.body.user
+    db.collection('foods').findOneAndUpdate({_id: uId, name: foodToDelete} , (err, result) => {
       if (err) return res.send(500, err)
       res.send(200, 'Deleted Allergen!')
     })

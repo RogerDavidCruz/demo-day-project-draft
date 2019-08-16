@@ -1,12 +1,21 @@
 /* how do you target specific pages of ejs?
 should I use IDs on the tags? */
 
+/* Standard Styling for all pages */
 html{
   font-size: 10px;
 }
 
 .allergic {
   color: red;
+}
+
+#instructions{
+  font-size: 2rem;
+}
+
+li{
+  font-size: 3rem;
 }
 
 #indexPage{

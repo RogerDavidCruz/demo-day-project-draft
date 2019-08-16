@@ -27,6 +27,12 @@
       </div>
 
       <div class="col-sm-6">
+        <h2>Find Cuisine</h2>
+        <a href="/cuisines"><button type="button">Click Here</button></a>
+      </div>
+
+
+      <div class="col-sm-6">
           <h2>Add an allergy</h2>
           <% if (user.local.email) { %>
             <form>
@@ -39,13 +45,13 @@
 
     <div class="row">
       <div class="col-sm-6">
-        <h2>User Profile Allergens</h2>
+        <h2>Your Allergens</h2>
         <ul>
           <% for(var i=0; i < foods.length; i++) {%>
             <li class="food">
               <a href="/foods/<%= foods[i] %>">
                 <span><%= foods[i] %></span></a>
-                <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                <span><i id='<%= foods[i]._id %>' class="fa fa-trash" aria-hidden="true"></i></span>
             </li>
             <% } %>
           </ul>
