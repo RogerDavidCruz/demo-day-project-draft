@@ -18,8 +18,16 @@ li{
   font-size: 3rem;
 }
 
+.opBox{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background: black;
+    opacity: .6;
+    z-index: 1;
+}
+
 #indexPage{
-  padding-top:80px;
   word-wrap:break-word;
   height: 100%;
   width: 100%;
@@ -37,13 +45,14 @@ li{
     color: black;
 }
 
-.mainBox{
-  background-color: gold;
-  height: 400px;
-  width: 50%;
-  text-align: center;
-  margin-left: 20%;
-  padding: 10%;
+.mainBox {
+    height: 100%;
+    text-align: center;
+    padding: 10%;
+    z-index: 2;
+    position: absolute;
+    top: 0%;
+    width: 100%;
 }
 
 iframe{
@@ -51,12 +60,19 @@ iframe{
   height: 600px;
 }
 
-h1{
-  font-size: 5rem;
+h1 {
+    font-size: 5rem;
+    color: white;
+    z-index: 2;
 }
 
-h2, h3{
-  font-size: 3rem;
+h2, h3 {
+    font-size: 3rem;
+    color: white;
+}
+
+.container{
+  width:100%;
 }
 
 #typedSub{
@@ -128,9 +144,9 @@ img {
 }
 
 a {
-  color: red;
-  background-color: white;
+  color: white;
 }
+
 
 /* Notes, look over @media syntax for responsiveness */
 /* Projects like levelground and Japanese Women's Society Projects */
