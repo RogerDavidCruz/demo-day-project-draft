@@ -1,30 +1,38 @@
-/* how do you target specific pages of ejs?
-should I use IDs on the tags? */
-
-/* Standard Styling for all pages */
+/* Index EJS Template, Login EJS Template, Sign Up EJS Template */
 html{
   font-size: 10px;
 }
 
-.allergic {
-  color: red;
+
+.opBox{
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: black;
+  opacity: .5;
+  z-index: 1;
 }
 
-#instructions{
-  font-size: 2rem;
-}
+
 
 li{
   font-size: 3rem;
 }
 
-.opBox{
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    background: black;
-    opacity: .6;
-    z-index: 1;
+p{
+  font-size: 2rem;
+  color: white;
+}
+
+label{
+  font-size: 2rem;
+  color: white;
+}
+
+
+.col-sm-offset-3 {
+    margin-left: 25%;
+    margin-top: 10rem;
 }
 
 #indexPage{
@@ -48,7 +56,9 @@ li{
 .mainBox {
     height: 100%;
     text-align: center;
-    padding: 10%;
+    padding-top: 10%;
+    padding-left: 35%;
+    padding-right:35%;
     z-index: 2;
     position: absolute;
     top: 0%;
@@ -73,6 +83,7 @@ h2, h3 {
 
 .container{
   width:100%;
+  padding: 0%;
 }
 
 #typedSub{
@@ -82,10 +93,16 @@ h2, h3 {
 
 a{
   font-size: 3rem;
+  text-decoration: underline;
+}
+
+.col-sm-6 {
+    width: 50%;
+    padding-right: 10%;
+    padding-left: 10%;
 }
 
 #loginPage{
-  padding-top:80px;
   word-wrap:break-word;
   height: 100%;
   width: 100%;
@@ -96,7 +113,6 @@ a{
 }
 
 #signupPage{
-  padding-top:80px;
   word-wrap:break-word;
   height: 100%;
   width: 100%;
@@ -105,7 +121,7 @@ a{
   background-repeat: no-repeat;
 }
 
-#ingredientPage{
+#mealPage{
   padding-top:80px;
   word-wrap:break-word;
   height: 100%;
@@ -123,7 +139,7 @@ a{
   background-image: url(img/loginTest4.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  color: limegreen;
+  color: white;
 }
 
 .indexLeft{
@@ -146,6 +162,21 @@ img {
 a {
   color: white;
 }
+
+#instructions{
+  font-size: 2rem;
+}
+
+.allergic {
+  color: red;
+}
+
+
+
+
+
+
+
 
 
 /* Notes, look over @media syntax for responsiveness */
