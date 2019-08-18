@@ -10,8 +10,6 @@
 </head>
 <body id="profilePage">
 
-  <div class="container">
-
     <section class="opBox"></section>
 
     <section class="mainBoxTwo">
@@ -21,25 +19,23 @@
       <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
-    <div class="row">
       ​
-
       <!-- ************Local Information************** -->
 
       <div class="col-sm-6">
-        <h2>Find Cuisine</h2>
-        <a href="/cuisines"><button type="button">Click Here</button></a>
-      </div>
-
-      <div class="col-sm-6">
-          <h2>Add an allergy</h2>
+          <h2>What are you allergic to?</h2>
           <% if (user.local.email) { %>
             <form>
               <input type="text" placeholder="Foods for Allergies" id="ingredient"> <!-- name must be correct to avoid null values into the database -->
-              <button class='btn-ingredient' type="submit">Submit</button>
+              <button class='btn-ingredient ' type="submit">Submit</button>
             </form>
           </div>
           <% } %>
+
+
+      <div class="col-sm-6">
+          <h2>Let us find a cuisine</h2>
+          <a href="/cuisines"><button type="button ">Click Here</button></a>
         </div>
 
     <div class="row">
