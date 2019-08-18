@@ -11,6 +11,7 @@ html{
   background: black;
   opacity: .5;
   z-index: 1;
+  position: fixed;
 }
 
 
@@ -65,10 +66,15 @@ label{
     width: 100%;
 }
 
-iframe{
-  width: 900px;
-  height: 600px;
+.mainBoxTwo {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    position: absolute;
+    top: 0%;
 }
+
 
 h1 {
     font-size: 5rem;
@@ -122,7 +128,6 @@ a{
 }
 
 #mealPage{
-  padding-top:80px;
   word-wrap:break-word;
   height: 100%;
   width: 100%;
@@ -132,7 +137,6 @@ a{
 }
 
 #profilePage{
-  padding-top:80px;
   word-wrap:break-word;
   height: 100%;
   width: 100%;
