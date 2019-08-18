@@ -102,7 +102,9 @@ module.exports = function(app, passport, db, ObjectId) {
   app.delete('/foods', isLoggedIn, (req, res) => {
     let foodToDelete = req.body.foodToDelete
     let uId = req.body.user
-    db.collection('foods').findOneAndUpdate({_id: uId, name: foodToDelete} , (err, result) => {
+    // db.collection('foods').findOneAndUpdate({_id: uId, name: foodToDelete} , (err, result) => {
+    db.collection('foods').findOneAndUpdate({user: req.user.local.email}, {$pull: { ingredients: req.body.ingredient }}, {multi: true}, (err, result) => {
+
       if (err) return res.send(500, err)
       res.send(200, 'Deleted Allergen!')
     })
