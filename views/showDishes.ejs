@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>FooChoi</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
@@ -14,10 +16,13 @@
   <section class="mainBoxTwo">
 
     <div class="page-header text-center">
-      <h1><span><i class="fas fa-utensils"></i></span> What do you wish to eat?</h1>
+      <h1><span><i class="fas fa-utensils"></i></span> Which dish do you wish to try?</h1>
       <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
+    <!-- ************Bottom Information************** -->
+
+  <div class="col-sm-6">
     <ul>
       <h2>Choose a Dish</h2>
       <% for(var i=0; i < meals.length; i++) {%>
@@ -27,9 +32,9 @@
           </a>
         </li>
         <% } %>
-      </ul>
-
-    </section>
+    </ul>
+  </div>
+</section>
 
     <script src="main.js"></script>
 

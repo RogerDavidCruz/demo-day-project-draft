@@ -162,6 +162,16 @@ a{
   background-image: url(img/table.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  color: white;
+}
+
+#showDishes{
+  word-wrap:break-word;
+  height: 100%;
+  width: 100%;
+  background-image: url(img/fork-and-knife.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #cuisinesPage{
