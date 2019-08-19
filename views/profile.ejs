@@ -13,7 +13,7 @@
 
     <section class="opBox"></section>
 
-    <section class="mainBoxTwo">
+    <section class="profileMainBox">
 
     <div class="page-header text-center">
       <h1><span><i class="fas fa-utensils"></i></span> Welcome <%= user.local.username %></h1>
@@ -24,7 +24,7 @@
       <!-- ************Local Information************** -->
 
       <div class="col-sm-6">
-          <h2>What are you allergic to?</h2>
+          <h2 class="questionAllergies">What are you allergic to?</h2>
           <% if (user.local.email) { %>
             <form>
               <input type="text" placeholder="Foods for Allergies" id="ingredient"> <!-- name must be correct to avoid null values into the database -->
@@ -39,7 +39,6 @@
           <a href="/cuisines"><button type="button ">Click Here</button></a>
         </div>
 
-    <div class="row">
       <div class="col-sm-6">
         <h2>Your Allergens</h2>
         <ul>
@@ -47,12 +46,12 @@
             <li class="food">
               <a href="/foods/<%= foods[i] %>">
                 <span><%= foods[i] %></span></a>
-                <span><i id='<%= foods[i]._id %>' class="fa fa-trash" aria-hidden="true"></i></span>
+                <span class="trashIcon"><i id='<%= foods[i]._id %>' class="fa fa-trash" aria-hidden="true"></i></span>
             </li>
             <% } %>
           </ul>
         </div>
-      </div>
+
     </section>
 
 

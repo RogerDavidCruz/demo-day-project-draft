@@ -18,14 +18,28 @@ body{
   position: cover;
 }
 
+/* .cuisineFinderTitle{
+  font-size: 10rem;
+} */
+
+
+/* Question styling */
+.questionAllergies{
+  font-size: 5rem;
+}
+
 .tiles {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-span{
+.cuisineTitle{
   display: block;
+}
+
+.trashIcon{
+  display: inline-block;
 }
 
 .cuisineTypes{
@@ -34,8 +48,8 @@ span{
 }
 
 ul, ol {
-    width: 40%;
-    margin-left: 30%;
+    width: 75%;
+    margin-left: 0%;
 }
 
 button{
@@ -72,6 +86,7 @@ label{
   background-image: url(img/loginTest1.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 .mainButton {
@@ -98,7 +113,14 @@ label{
 .mainBoxTwo {
     height: 100%;
     width: 100%;
-    text-align: center;
+    z-index: 2;
+    position: absolute;
+    top: 0%;
+}
+
+.profileMainBox {
+    height: 100%;
+    width: 100%;
     z-index: 2;
     position: absolute;
     top: 0%;
@@ -139,21 +161,21 @@ a{
 
 #loginPage{
   word-wrap:break-word;
-  /* height: 100%; */
   width: 100%;
   background-image: url(img/loginTest6.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
+  overflow: hidden;
 }
 
 #signupPage{
   word-wrap:break-word;
-  /* height: 100%; */
   width: 100%;
   background-image: url(img/loginTest4.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 #mealPage{
@@ -246,7 +268,7 @@ a {
 /* Notes, look over @media syntax for responsiveness */
 /* Projects like levelground and Japanese Women's Society Projects */
 
-@media (min-width:412px) and (max-width: 769px) {
+/* @media (min-width:412px) and (max-width: 769px) {
 
 iframe{
   width: 800px;
@@ -288,4 +310,4 @@ iframe{
         color: black;
     }
 
-}
+} */
