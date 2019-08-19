@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>FooChoi</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -21,11 +22,11 @@
         console.log("allergic", allergic)
         let className = ""
         if(allergic){ //if allergic to this, change the className to allergic
-          className = "allergic"
+          className = 'allergic'
         }
         %>
         <li class="meal <%= className %>">
-          <span><%= meal[propertyName] %></span>
+          <span><%= meal[propertyName]%><i class="fas fa-allergies"></i></span>
         </li>
         <% }
       } %>
