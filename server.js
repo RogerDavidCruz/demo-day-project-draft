@@ -2,6 +2,9 @@
 
 // set up ======================================================================
 // get all the tools we need
+if (process.env.NODE_ENV !== 'production') {
+ require('dotenv').config();
+}
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 9000;
