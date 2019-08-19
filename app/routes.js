@@ -34,11 +34,13 @@ module.exports = function(app, passport, db, ObjectId) {
   app.get('/recipes/:cuisine', function(req, res){
     const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${req.params.cuisine}`
     fetch(url)
+
     .then(res => res.json())
     .then(dishes => {
       console.log(dishes)
       console.log("response from fetch")
       res.render('showDishes.ejs', {meals : dishes.meals})
+
     })
     .catch(err => {
       console.log(`error ${err}`)

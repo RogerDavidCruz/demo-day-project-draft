@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <title>FooChoi</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="alternativePage">
+
+    <section class="opBox"></section>
+
+    <section class="mainBoxTwo">
+
+    <div class="page-header text-center">
+      <h1><span><i class="fas fa-utensils"></i></span> alternatives </h1>
+      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <h2>Your Allergens</h2>
+        <ul>
+          <% for(var i=0; i < foods.length; i++) {%>
+            <li class="food">
+              <a href="/foods/<%= foods[i] %>">
+                <span><%= foods[i] %></span></a>
+                <span><i id='<%= foods[i]._id %>' class="fa fa-trash" aria-hidden="true"></i></span>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+  <script src="main.js"></script>
+
+    </body>
+    </html>
