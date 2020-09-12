@@ -16,7 +16,7 @@
     "mongoose": "^5.4.20",
     "morgan": "^1.9.1",
     "mpath": ">=0.5.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "nodemon": "^1.19.1",
     "passport": "~0.3.2",
     "passport-facebook": "~2.1.1",
